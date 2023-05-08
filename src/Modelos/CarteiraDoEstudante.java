@@ -10,7 +10,7 @@ public class CarteiraDoEstudante {
 		this.matricula = matricula;
 		this.curso = curso;
 	}
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -38,9 +38,7 @@ public class CarteiraDoEstudante {
 	@Override
 	public String toString() {
 		return " MATRÍCULA..: " + matricula
-			 + "\n\n NOME.......: " + nome
-			 + "\n CURSO......: " + curso;
+			 + "\n\n NOME.......: " + nome.toUpperCase()
+			 + "\n CURSO......: " + curso.toUpperCase();
 	}
-	
-	
 }

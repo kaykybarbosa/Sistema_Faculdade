@@ -50,11 +50,11 @@ public class Professor {
 	}
 
 	public boolean AddNotaMensal(Aluno aluno, double[] notas) {
-		
-		for (int i = 0; i < aluno.getMaterias().size(); i++) {
+	
+		for (Materia materia : aluno.getMaterias()) {
 
-			if (aluno.getMaterias().get(i).getIdMateria() == this.idMateria) {
-				aluno.getMaterias().get(i).setMensal(new Avaliacao(notas[0], notas[1]));
+			if (materia.getIdMateria() == this.idMateria) {
+				materia.setMensal(new Avaliacao(notas[0], notas[1]));
 				return true;
 			}
 		}
@@ -64,10 +64,10 @@ public class Professor {
 
 	public boolean AddNotaBimestral(Aluno aluno, double[] notas) {
 
-		for (int i = 0; i < aluno.getMaterias().size(); i++) {
+		for (Materia materia : aluno.getMaterias()) {
 
-			if (aluno.getMaterias().get(i).getIdMateria() == this.idMateria) {
-				aluno.getMaterias().get(i).setBimestral(new Avaliacao(notas[0], notas[1]));
+			if (materia.getIdMateria() == this.idMateria) {
+				materia.setBimestral(new Avaliacao(notas[0], notas[1]));
 				
 				this.AddSituacaoDoAluno(aluno);
 				return true;
@@ -78,14 +78,14 @@ public class Professor {
 
 	private void AddSituacaoDoAluno(Aluno aluno) {
 
-		for (int i = 0; i < aluno.getMaterias().size(); i++) {
+		for (Materia materia : aluno.getMaterias()) {
 			
-			if(aluno.getMaterias().get(i).getIdMateria() == idMateria) {
+			if(materia.getIdMateria() == idMateria) {
 				
-				double mensal = aluno.getMaterias().get(i).getMensal().getNota();
-				double bimestral = aluno.getMaterias().get(i).getBimestral().getNota();
+				double mensal = materia.getMensal().getNota();
+				double bimestral = materia.getBimestral().getNota();
 				
-				aluno.getMaterias().get(i).setSituacao(ControleDeNotas.VerificarSituacao(mensal, bimestral));
+				materia.setSituacao(ControleDeNotas.VerificarSituacao(mensal, bimestral));
 			}
 		}
 	}
@@ -94,7 +94,6 @@ public class Professor {
 
 		return " CÓDIGO.......: "		+ codProfessor
 				+ "\n\n NOME.........: "+ nome 
-				+ "\n MATÉRIA......: " + materia
-				+ "\n ID MATÉRIA......: " 	+ idMateria;
+				+ "\n MATÉRIA......: " + materia;
 	}
 }

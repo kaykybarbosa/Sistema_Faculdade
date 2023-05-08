@@ -1,4 +1,4 @@
-package Controler;
+package Controles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,9 +29,11 @@ public class Cadastros {
 	public Aluno getAluno(String matricula) {
 
 		for (int i = 0; i < this.alunos.size(); i++) {
+			for (Aluno aluno : this.getListaAlunos()){
 
-			if (matricula.equals(this.alunos.get(i).getCarteiraEstudante().getMatricula())) {
-				return this.alunos.get(i);
+				if (aluno.getCarteiraEstudante().getMatricula().equals(matricula)){
+					return aluno;
+				}
 			}
 		}
 		return null;
@@ -53,10 +55,11 @@ public class Cadastros {
 	
 	public boolean RemoverAluno(String matricula) {
 
-		for (int i = 0; i < this.alunos.size(); i++) {
-			if (this.alunos.get(i).getCarteiraEstudante().getMatricula().equals(matricula)) {
+		for (Aluno aluno : this.alunos) {
+			
+			if (aluno.getCarteiraEstudante().getMatricula().equals(matricula)) {
 
-				this.alunos.remove(i);
+				this.alunos.remove(aluno);
 				return true;
 			}
 		}
@@ -65,8 +68,9 @@ public class Cadastros {
 	
 	public boolean AlunoExiste(String matricula) {
 
-		for (int i = 0; i < this.alunos.size(); i++) {
-			if (this.alunos.get(i).getCarteiraEstudante().getMatricula().equals(matricula)) {
+		for (Aluno aluno : this.alunos) {
+			
+			if (aluno.getCarteiraEstudante().getMatricula().equals(matricula)) {
 				return true;
 			}
 		}
@@ -84,10 +88,10 @@ public class Cadastros {
 	
 	public Professor getProfessor(String codProfessor) {
 
-		for (int i = 0; i < this.professores.size(); i++) {
-
-			if (codProfessor.equals(this.professores.get(i).getCodProfessor())) {
-				return this.professores.get(i);
+		for (Professor professor : this.professores) {
+			
+			if (professor.getCodProfessor().equals(codProfessor)) {
+				return professor;
 			}
 		}
 		return null;
@@ -105,10 +109,10 @@ public class Cadastros {
 
 	public boolean RemoverProfessor(String codProfessor) {
 
-		for (int i = 0; i < this.professores.size(); i++) {
-			if (this.professores.get(i).getCodProfessor().equals(codProfessor)) {
-
-				this.professores.remove(i);
+		for (Professor professor : this.professores) {
+			
+			if (professor.getCodProfessor().equals(codProfessor)) {
+				this.professores.remove(professor);
 				return true;
 			}
 		}
@@ -117,8 +121,9 @@ public class Cadastros {
 
 	public boolean ProfessorExiste(String codProfessor) {
 
-		for (int i = 0; i < this.professores.size(); i++) {
-			if (this.professores.get(i).getCodProfessor().equals(codProfessor)) {
+		for (Professor professor : this.professores) {
+			
+			if (professor.getCodProfessor().equals(codProfessor)) {
 				return true;
 			}
 		}
@@ -131,23 +136,23 @@ public class Cadastros {
 	
 	public boolean AddMateria(Materia materia) {
 		
-		if (this.verificarMateriasCadastradas(materia.getIdMateria())) {
-			
-			materias.add(materia);
-			return true;
+		if (this.VerificarSePossuiMateria(materia.getIdMateria())) {
+			return false;
 		}
-		return false;
+
+		materias.add(materia);
+		return true;
 	}
 	
-	private boolean verificarMateriasCadastradas(int idMateria) {
+	private boolean VerificarSePossuiMateria(int idMateria) {
 		
-		for (int i = 0; i < materias.size(); i++) {
+		for (Materia materia : this.materias) {
 			
-			if (materias.get(i).getIdMateria() == idMateria) {
-				return false;
+			if (materia.getIdMateria() == idMateria) {
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	private List<Materia> getMateriaADS(){

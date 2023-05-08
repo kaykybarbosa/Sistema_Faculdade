@@ -1,8 +1,6 @@
 package Modelos;
 
 import java.util.Scanner;
-import Controler.Excecoes;
-
 
 public class ControleDeNotas {
 	static Scanner input = new Scanner(System.in);
